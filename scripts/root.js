@@ -1,5 +1,6 @@
 
 import { GameObject } from './GameObject.js';
+import { Component } from './component.js';
 
 
 
@@ -49,8 +50,8 @@ class EasyCanvas   {
         this.Ctx.clearRect(0, 0, this.Canvas.width, this.Canvas.height);
     }
 
-    create(shape='sqaure',x=innerWidth/2,y=innerHeight/2,size=100,outLineOnly=false,color='red',outlineColor='black',lineWidth=2){
-        const obj =  new GameObject(x,y,shape,size,outLineOnly,color,outlineColor,lineWidth);
+    create(shape='sqaure',x=innerWidth/2,y=innerHeight/2,width=100,height=100,color='red',outlineColor='black',lineWidth=2){
+        const obj =  new Component(shape,x,y,width,height,color,outlineColor,lineWidth);
         obj.draw(this.Ctx);
         this.Objects.push(obj);
         return obj;
