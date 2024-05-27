@@ -1,6 +1,6 @@
 
 import { GameObject } from './GameObject.js';
-import { Component } from './component.js';
+import { Component, TextComponent } from './component.js';
 
 
 
@@ -57,8 +57,24 @@ class EasyCanvas   {
         this.Canvas.height = window.innerHeight;
     }
 
+
+    /**
+ * Creates a new component and adds it to the component list.
+ *
+ * @param {string} shape - The shape of the component, defaults to 'square'.
+ * @param {number} x - The x-coordinate of the component, defaults to half of the inner width.
+ * @param {number} y - The y-coordinate of the component, defaults to half of the inner height.
+ * @param {number} width - The width of the component, defaults to 100.
+ * @param {number} height - The height of the component, defaults to 100.
+ * @param {string} color - The color of the component, defaults to 'red'.
+ * @param {string} outlineColor - The outline color of the component, defaults to 'black'.
+ * @param {number} lineWidth - The line width of the component, defaults to 2.
+ * @param {string} id - The id of the component.
+ * @returns {Component} The newly created component.
+ */
+
     create(shape='sqaure',x=innerWidth/2,y=innerHeight/2,width=100,height=100,color='red',outlineColor='black',lineWidth=2,id){
-        const obj =  new Component(shape,x,y,width,height,color,outlineColor,lineWidth,id);
+        const obj =  new Component(this.Ctx,shape,x,y,width,height,color,outlineColor,lineWidth,id);
         obj.draw(this.Ctx);
         this.Component.push(obj);
         return obj;
@@ -83,6 +99,7 @@ ec.create('circle', 400, 400, 50, 50, 'transparent', 'black', 12);
 
 ec.create('sqaure', 500, 500, 50, 50, 'transparent', 'black', 12);
 ec.create('roundedRect', 600, 600, 50, 50, 'red', 'green', 12);
+const text = new TextComponent(ec.Ctx,220,120,'hello world','Ariel',50,'red','black');
 console.log(ec)
 
 
@@ -101,10 +118,15 @@ console.log(ec)
         ec.clear();
         ec.background('#aaaaaa');
         //ec.Ctx.translate(0,0);
+        
         ec.Component.forEach(obj => {
            
-            obj.draw(ec.Ctx).shadow(ec.Ctx,'black',5,10,10).colorGRD(ec.Ctx,['red','blue','green']).up().left()
+            obj.draw().shadow('black',5,10,10)
+            if (obj.Shape == 'circle') {
+                obj.draw().shadow('black',5,10,10).radialGRD(['red','green',])
+            }
         });
+        text.resetShadow().draw();
        // ec.Component[0].colorGRD(ec.Ctx,['red','blue']).draw(ec.Ctx);
         requestAnimationFrame(animate);
     }

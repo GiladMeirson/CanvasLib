@@ -1,5 +1,6 @@
 export class Component {
-  constructor(shape,x,y,width,height,color,outlineColor,lineWidth,id) {
+  constructor(ctx,shape,x,y,width,height,color,outlineColor,lineWidth,id) {
+    this.Ctx=ctx;
     this.CenterX = x+width/2;
     this.CenterY = y+height/2;
     this.Rightest = x+width+lineWidth/2;
@@ -17,39 +18,39 @@ export class Component {
     this.LineWidth = lineWidth;
   }
 
-  draw(ctx){
+  draw(){
     if (this.Color == 'transparent') {
         if (this.Shape == 'circle') {
-            ctx.beginPath();
+            this.Ctx.beginPath();
            this.CenterX=this.X;
             this.CenterY=this.Y;
-            ctx.arc(this.CenterX, this.CenterY, this.Width/2, 0, Math.PI * 2, false);
+            this.Ctx.arc(this.CenterX, this.CenterY, this.Width/2, 0, Math.PI * 2, false);
             this.Radius = this.Width/2;
-            ctx.strokeStyle = this.OutlineColor; // Set the stroke color
-            ctx.lineWidth = this.LineWidth; // Set the stroke width
-            ctx.stroke(); // Draw the outline
-            ctx.closePath();
+            this.Ctx.strokeStyle = this.OutlineColor; // Set the stroke color
+            this.Ctx.lineWidth = this.LineWidth; // Set the stroke width
+            this.Ctx.stroke(); // Draw the outline
+            this.Ctx.closePath();
         }
         else if (this.Shape == 'sqaure') {
-            ctx.strokeStyle = this.OutlineColor; // Set the stroke color
-            ctx.lineWidth = this.LineWidth; // Set the stroke width
-            ctx.strokeRect(this.X, this.Y, this.Width, this.Height); // Draw the outline
+            this.Ctx.strokeStyle = this.OutlineColor; // Set the stroke color
+            this.Ctx.lineWidth = this.LineWidth; // Set the stroke width
+            this.Ctx.strokeRect(this.X, this.Y, this.Width, this.Height); // Draw the outline
         }
         else if (this.Shape == 'triangle') {
-            ctx.beginPath();
-            ctx.moveTo(this.X, this.Y);
-            ctx.lineTo(this.X+this.Width, this.Y);
-            ctx.lineTo(this.X+this.Width/2, this.Y+this.Width);
-            ctx.closePath();
-            ctx.strokeStyle = this.OutlineColor; // Set the stroke color
-            ctx.lineWidth = this.LineWidth; // Set the stroke width
-            ctx.stroke(); // Draw the outline
+            this.Ctx.beginPath();
+            this.Ctx.moveTo(this.X, this.Y);
+            this.Ctx.lineTo(this.X+this.Width, this.Y);
+            this.Ctx.lineTo(this.X+this.Width/2, this.Y+this.Width);
+            this.Ctx.closePath();
+            this.Ctx.strokeStyle = this.OutlineColor; // Set the stroke color
+            this.Ctx.lineWidth = this.LineWidth; // Set the stroke width
+            this.Ctx.stroke(); // Draw the outline
         }
 
         else if(this.Shape == 'roundedRect'){
-            ctx.strokeStyle = this.OutlineColor; // Set the stroke color
-            ctx.lineWidth = this.LineWidth; // Set the stroke width
-            roundedRect(ctx,this.X,this.Y,this.Width,this.Height,10);
+            this.Ctx.strokeStyle = this.OutlineColor; // Set the stroke color
+            this.Ctx.lineWidth = this.LineWidth; // Set the stroke width
+            roundedRect(this.Ctx,this.X,this.Y,this.Width,this.Height,10);
 
         }
     }
@@ -57,37 +58,37 @@ export class Component {
     else{
 
         if (this.Shape == 'circle') {
-            ctx.beginPath();
+            this.Ctx.beginPath();
             this.CenterX=this.X;
             this.CenterY=this.Y;
-            ctx.arc(this.CenterX, this.CenterY, this.Width/2, 0, Math.PI * 2, false);
+            this.Ctx.arc(this.CenterX, this.CenterY, this.Width/2, 0, Math.PI * 2, false);
             this.Radius = this.Width/2;
         
-            ctx.fillStyle = this.Color;
-            ctx.fill();
-            ctx.closePath();
+            this.Ctx.fillStyle = this.Color;
+            this.Ctx.fill();
+            this.Ctx.closePath();
             
         }
         else if (this.Shape == 'sqaure') {
-            ctx.fillStyle = this.Color;
-            ctx.fillRect(this.X, this.Y, this.Width, this.Height);
+            this.Ctx.fillStyle = this.Color;
+            this.Ctx.fillRect(this.X, this.Y, this.Width, this.Height);
         }
         else if (this.Shape == 'triangle') {
-            ctx.beginPath();
-            ctx.moveTo(this.X, this.Y);
-            ctx.lineTo(this.X+this.Width, this.Y);
-            ctx.lineTo(this.X+this.Width/2, this.Y+this.Width);
-            ctx.fillStyle = this.Color;
-            ctx.fill();
-            ctx.closePath();
+            this.Ctx.beginPath();
+            this.Ctx.moveTo(this.X, this.Y);
+            this.Ctx.lineTo(this.X+this.Width, this.Y);
+            this.Ctx.lineTo(this.X+this.Width/2, this.Y+this.Width);
+            this.Ctx.fillStyle = this.Color;
+            this.Ctx.fill();
+            this.Ctx.closePath();
         }
 
         else if(this.Shape == 'roundedRect'){
-            ctx.strokeStyle = this.OutlineColor; // Set the stroke color
-            ctx.lineWidth = this.LineWidth; // Set the stroke width
-            roundedRect(ctx,this.X,this.Y,this.Width,this.Height,10);
-            ctx.fillStyle = this.Color;
-            ctx.fill();
+            this.Ctx.strokeStyle = this.OutlineColor; // Set the stroke color
+            this.Ctx.lineWidth = this.LineWidth; // Set the stroke width
+            roundedRect(this.Ctx,this.X,this.Y,this.Width,this.Height,10);
+            this.Ctx.fillStyle = this.Color;
+            this.Ctx.fill();
         }
     }
 
@@ -95,31 +96,49 @@ export class Component {
 
 }
 
-    shadow(ctx,color,blur,offsetX,offsetY){
-        ctx.shadowColor = color;
-        ctx.shadowBlur = blur;
-        ctx.shadowOffsetX = offsetX;
-        ctx.shadowOffsetY = offsetY;
+    shadow(color,blur,offsetX,offsetY){
+        this.Ctx.shadowColor = color;
+        this.Ctx.shadowBlur = blur;
+        this.Ctx.shadowOffsetX = offsetX;
+        this.Ctx.shadowOffsetY = offsetY;
         return this;
     }
 
-    rotate(ctx,angle){
-        ctx.translate(this.CenterX, this.CenterY);
-        ctx.rotate(angle * Math.PI / 180);
-        ctx.translate(-this.CenterX, -this.CenterY);
+    resetShadow(){
+        this.Ctx.shadowColor = 'transparent';
+        this.Ctx.shadowBlur = 0;
+        this.Ctx.shadowOffsetX = 0;
+        this.Ctx.shadowOffsetY = 0;
+        return this;
+    
+    }
+
+    rotate(angle){
+        this.Ctx.translate(this.CenterX, this.CenterY);
+        this.Ctx.rotate(angle * Math.PI / 180);
+        this.Ctx.translate(-this.CenterX, -this.CenterY);
         return this;
     }
 
-    colorGRD(ctx,colors){
-        let grd = ctx.createLinearGradient(this.X, this.Y, this.X+this.Width, this.Y+this.Height);
+    linearGRD(colors){
+        let grd = this.Ctx.createLinearGradient(this.X, this.Y, this.X+this.Width, this.Y+this.Height);
         colors.forEach((color,index)=>{
             grd.addColorStop(index/colors.length, color);
         });
-        ctx.fillStyle = grd;
+        this.Ctx.fillStyle = grd;
         this.Color=grd;
         return this;
     }
-
+    
+    radialGRD(colors){
+        let grd = this.Ctx.createRadialGradient(this.CenterX, this.CenterY, 0, this.CenterX, this.CenterY, this.Width);
+        colors.forEach((color,index)=>{
+            grd.addColorStop(index/colors.length, color);
+        });
+        this.Ctx.fillStyle = grd;
+        this.Color=grd;
+        return this;
+    }
     left(num=1){
         this.X-=num;
         return this;
@@ -141,6 +160,48 @@ export class Component {
     
     }
     
+}
+
+
+
+
+
+export class TextComponent{
+    constructor(ctx,x,y,text,font,fontSize,color,outlineColor){
+        this.X=x;
+        this.Y=y;
+        this.Text=text;
+        this.Font=fontSize+'px '+font;
+        this.Color=color;
+        this.Ctx=ctx;
+        this.OutlineColor=outlineColor;
+
+    }
+
+    draw(){
+        if (this.Color!=false) {
+            this.Ctx.font = this.Font;
+            this.Ctx.fillStyle = this.Color;
+            this.Ctx.fillText(this.Text, this.X, this.Y);
+            return this;
+        }
+        else{
+            this.Ctx.font = this.Font;
+            this.Ctx.strokeStyle = this.OutlineColor;
+            this.Ctx.strokeText(this.Text, this.X, this.Y);
+            return this;
+        }
+
+    }
+
+    resetShadow(){
+        this.Ctx.shadowColor = 'transparent';
+        this.Ctx.shadowBlur = 0;
+        this.Ctx.shadowOffsetX = 0;
+        this.Ctx.shadowOffsetY = 0;
+        return this;
+    
+    }
 }
 
 
