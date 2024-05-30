@@ -159,6 +159,101 @@ export class Component {
         return this;
     
     }
+
+
+
+    onKeyBoard_left(func){
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowLeft') {
+                func();
+            }
+        });
+        return this;
+
+    }
+    onKeyBoard_right(func){
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowRight') {
+                func();
+            }
+        });
+        return this;
+
+    }
+    onKeyBoard_up(func){
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowUp') {
+                func();
+            }
+        });
+        return this;
+
+    }
+    onKeyBoard_down(func){
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'ArrowDown') {
+                func();
+            }
+        });
+        return this;
+
+    }
+
+    onKeyBoard_space(func){
+        window.addEventListener('keydown', (event) => {
+            if (event.key === ' ') {
+                func();
+            }
+        });
+        return this;
+
+    }
+
+    onKeyBoard_enter(func){
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                func();
+            }
+        });
+        return this;
+
+    }
+
+    onKeyBoard_A(func){
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'a') {
+                func();
+            }
+        });
+        return this;
+    }
+
+    onKeyBoard_D(func){
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'd') {
+                func();
+            }
+        });
+        return this;
+    }
+
+    onKeyBoard_W(func){
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 'w') {
+                func();
+            }
+        });
+        return this;
+    }
+
+    onKeyBoard_S(func){
+        window.addEventListener('keydown', (event) => {
+            if (event.key === 's') {
+                func();
+            }
+        });
+        return this;
+    }
     
 }
 
@@ -167,7 +262,7 @@ export class Component {
 
 
 export class TextComponent{
-    constructor(ctx,x,y,text,font,fontSize,color,outlineColor){
+    constructor(ctx,x,y,text,font,fontSize,color,outlineColor,id){
         this.X=x;
         this.Y=y;
         this.Text=text;
@@ -175,11 +270,12 @@ export class TextComponent{
         this.Color=color;
         this.Ctx=ctx;
         this.OutlineColor=outlineColor;
+        this.Id = id==undefined || id==null || id==''?Math.random().toString(36).substring(7):id;
 
     }
 
     draw(){
-        if (this.Color!=false) {
+        if (this.Color!='transparent') {
             this.Ctx.font = this.Font;
             this.Ctx.fillStyle = this.Color;
             this.Ctx.fillText(this.Text, this.X, this.Y);
