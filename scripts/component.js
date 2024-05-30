@@ -165,7 +165,7 @@ export class Component {
     onKeyBoard_left(func){
         window.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft') {
-                func();
+                func(this);
             }
         });
         return this;
@@ -174,7 +174,7 @@ export class Component {
     onKeyBoard_right(func){
         window.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowRight') {
-                func();
+                func(this);
             }
         });
         return this;
@@ -183,7 +183,7 @@ export class Component {
     onKeyBoard_up(func){
         window.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowUp') {
-                func();
+                func(this);
             }
         });
         return this;
@@ -192,7 +192,7 @@ export class Component {
     onKeyBoard_down(func){
         window.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowDown') {
-                func();
+                func(this);
             }
         });
         return this;
@@ -202,7 +202,7 @@ export class Component {
     onKeyBoard_space(func){
         window.addEventListener('keydown', (event) => {
             if (event.key === ' ') {
-                func();
+                func(this);
             }
         });
         return this;
@@ -212,7 +212,7 @@ export class Component {
     onKeyBoard_enter(func){
         window.addEventListener('keydown', (event) => {
             if (event.key === 'Enter') {
-                func();
+                func(this);
             }
         });
         return this;
@@ -222,7 +222,7 @@ export class Component {
     onKeyBoard_A(func){
         window.addEventListener('keydown', (event) => {
             if (event.key === 'a') {
-                func();
+                func(this);
             }
         });
         return this;
@@ -231,7 +231,7 @@ export class Component {
     onKeyBoard_D(func){
         window.addEventListener('keydown', (event) => {
             if (event.key === 'd') {
-                func();
+                func(this);
             }
         });
         return this;
@@ -240,7 +240,7 @@ export class Component {
     onKeyBoard_W(func){
         window.addEventListener('keydown', (event) => {
             if (event.key === 'w') {
-                func();
+                func(this);
             }
         });
         return this;
@@ -249,7 +249,7 @@ export class Component {
     onKeyBoard_S(func){
         window.addEventListener('keydown', (event) => {
             if (event.key === 's') {
-                func();
+                func(this);
             }
         });
         return this;

@@ -122,6 +122,15 @@ class EasyCanvas   {
 }
 
 
+
+
+
+
+
+
+
+//////////////////////////test script//////////////////////////
+
 let ec = new EasyCanvas('', 'fullScreen');
 ec.createComponent('circle', 100, 100, 50, 50, 'blue', 'black', 2, 'circle1');
 ec.createComponent('sqaure', 150, 150, 150, 50, 'red', 'black', 2);
@@ -142,8 +151,22 @@ ec.checkCoordinates()
         ec.clear();
         ec.background('#aaaaaa');
         ec.Component.forEach(obj => {
-            obj.left(5).draw()
+            obj.draw()
         });
         text.resetShadow().draw();
     });
+
+
+    ec.Component[0].onKeyBoard_left((comp)=>{
+        comp.left(5);
+    })
+    ec.Component[0].onKeyBoard_right((comp)=>{
+        comp.right(5);
+    })
+    ec.Component[0].onKeyBoard_up((comp)=>{
+        comp.up(5);
+    })
+    ec.Component[0].onKeyBoard_down((comp)=>{
+        comp.down(5);
+    })
  
